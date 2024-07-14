@@ -7,8 +7,10 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose, showToastMessage }
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [tags, setTags] = useState([]);
+
     const [error, setError] = useState(null);
 
+    // Effect to update state when noteData changes
     useEffect(() => {
         if (noteData) {
             setTitle(noteData.title || '');
@@ -17,6 +19,7 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose, showToastMessage }
         }
     }, [noteData]);
 
+    // Add Note
     const addNewNote = async () => {
         try {
             const response = await axiosInstance.post('/add-note', {
@@ -27,8 +30,8 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose, showToastMessage }
 
             if (response.data && response.data.success) {
                 showToastMessage('Note Added Successfully');
-                onClose();
                 getAllNotes();
+                onClose();
             }
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
@@ -37,6 +40,7 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose, showToastMessage }
         }
     };
 
+    // Edit note
     const editNote = async () => {
         try {
             const response = await axiosInstance.put(`/edit-note/${noteData._id}`, {
@@ -64,7 +68,7 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose, showToastMessage }
         }
 
         if (!content) {
-            setError('Please Enter Content');
+            setError('Please Enter a Content');
             return;
         }
 
@@ -81,15 +85,12 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose, showToastMessage }
         <div className='relative'>
             <button
                 className='w-10 h-10 rounded-full flex items-center justify-center absolute top-3 right-3 hover:bg-slate-50'
-                onClick={() => {
-                    console.log("Close button clicked");
-                    onClose();
-                }}
+                onClick={onClose}
             >
                 <MdClose className='text-xl text-slate-400' />
             </button>
 
-            <div className='flex flex-col gap-2'>
+            <div className='flex felx-col gap-2'>
                 <label className='input-label'>Title</label>
                 <input
                     type='text'

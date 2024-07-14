@@ -179,7 +179,10 @@ const Home = () => {
 
                 <Modal
                     isOpen={openAddEditModal.isShown}
-                    onRequestClose={() => setOpenAddEditModal({ isShown: false, type: 'add', data: null })}
+                    onRequestClose={() => {
+                        console.log("Modal close requested");
+                        setOpenAddEditModal({ isShown: false, type: 'add', data: null });
+                    }}
                     style={{
                         overlay: {
                             backgroundColor: 'rgba(0,0,0,0.2)'
@@ -191,7 +194,10 @@ const Home = () => {
                     <AddEditNotes
                         type={openAddEditModal.type}
                         noteData={openAddEditModal.data}
-                        onClose={() => setOpenAddEditModal({ isShown: false, type: 'add', data: null })}
+                        onClose={() => {
+                            console.log("AddEditNotes close requested");
+                            setOpenAddEditModal({ isShown: false, type: 'add', data: null });
+                        }}
                         getAllNotes={getAllNotes}
                         showToastMessage={showToastMessage}
                     />
@@ -205,7 +211,7 @@ const Home = () => {
                 />
             </div>
         </>
-    )
+    );
 }
 
 export default Home;

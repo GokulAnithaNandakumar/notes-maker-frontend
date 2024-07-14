@@ -7,7 +7,6 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose, showToastMessage }
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [tags, setTags] = useState([]);
-
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -82,7 +81,10 @@ const AddEditNotes = ({ noteData, type, getAllNotes, onClose, showToastMessage }
         <div className='relative'>
             <button
                 className='w-10 h-10 rounded-full flex items-center justify-center absolute top-3 right-3 hover:bg-slate-50'
-                onClick={onClose}
+                onClick={() => {
+                    console.log("Close button clicked");
+                    onClose();
+                }}
             >
                 <MdClose className='text-xl text-slate-400' />
             </button>

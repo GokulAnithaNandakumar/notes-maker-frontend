@@ -6,8 +6,8 @@ import { validateEmail } from '../../utils/helper';
 import axiosInstance from '../../utils/axiosInstance';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('testuser@gmail.com');
+  const [password, setPassword] = useState('testuser@123');
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
@@ -26,13 +26,13 @@ const Login = () => {
     }
 
     setError('');
-    //login api call
+    // Login API call
     try {
       const response = await axiosInstance.post('/login', {
         email: email,
         password: password,
       });
-      //hangle login ersponse
+      // Handle login response
       if (response.data && response.data.accessToken) {
         localStorage.setItem('token', response.data.accessToken);
         navigate('/dashboard');

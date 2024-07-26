@@ -57,11 +57,13 @@ const Login = () => {
               type='text' 
               placeholder='Email' 
               className='input-box' 
+              defaultValue="testuser@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <PasswordInput 
               value={password}
+              defaultValue="testuser@123"
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Password'
             />
